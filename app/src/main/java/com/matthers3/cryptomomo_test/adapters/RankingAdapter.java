@@ -24,7 +24,7 @@ public class RankingAdapter extends ListAdapter<CryptoCurrency> {
 
         TextView name = (TextView) view.findViewById(R.id.coin_name);
         TextView price = (TextView) view.findViewById(R.id.coin_price);
-        name.setText(Items[i].Name);
+        name.setText(Items[i].name);
         price.setText(Items[i].PriceString());
         return view;
     }
