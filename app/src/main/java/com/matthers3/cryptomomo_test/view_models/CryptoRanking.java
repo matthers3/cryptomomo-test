@@ -26,9 +26,10 @@ public class CryptoRanking extends ViewModel {
         setupRanking();
     }
 
-    private void setupRanking()
+    public void setupRanking()
     {
         CompletableFuture.runAsync(() -> {
+            currencies.postValue(new CryptoCurrency[0]);
             CryptoCurrency[] views = APICall();
             Arrays.sort(views);
             currencies.postValue(views);

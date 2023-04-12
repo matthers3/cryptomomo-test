@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.matthers3.cryptomomo_test.adapters.RankingAdapter;
@@ -20,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupObserver();
+
+        Button button = (Button) findViewById(R.id.refresh_button);
+        button.setOnClickListener(v -> ranking.setupRanking());
     }
 
     private void setupObserver()

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Crypto Momo 🐼</string>
+    <string name="refresh_button">Refresh ♻</string>
 </resources>
