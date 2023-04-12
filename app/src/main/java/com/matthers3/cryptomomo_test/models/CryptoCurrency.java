@@ -11,8 +11,7 @@ public class CryptoCurrency implements Comparable<CryptoCurrency> {
         this.price = Price;
     }
 
-    public String PriceString()
-    {
+    public String PriceString() {
         return String.format(Locale.getDefault(), "$%.1f", price);
     }
 
