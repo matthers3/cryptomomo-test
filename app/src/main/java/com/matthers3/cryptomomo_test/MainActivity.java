@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.matthers3.cryptomomo_test.adapters.RankingAdapter;
 import com.matthers3.cryptomomo_test.models.CryptoCurrency;
+import com.matthers3.cryptomomo_test.services.NotificationService;
 import com.matthers3.cryptomomo_test.view_models.BitcoinPriceViewModel;
 import com.matthers3.cryptomomo_test.view_models.CryptoRanking;
 
@@ -25,8 +26,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setNotifications();
         setupObserver();
         setupListeners();
+    }
+
+    private void setNotifications() {
+        NotificationService.setupNotifications(this);
     }
 
     private void setupObserver()
@@ -35,14 +41,14 @@ public class MainActivity extends AppCompatActivity {
         priceViewModel = new BitcoinPriceViewModel(getApplicationContext());
 
         Observer<CryptoCurrency[]> observer = data -> {
-           listView = (ListView) findViewById(R.id.rankingView);
+           listView = findViewById(R.id.rankingView);
            RankingAdapter adapter = new RankingAdapter(data,
                    getApplicationContext());
            listView.setAdapter(adapter);
         };
 
         Observer<Float> priceObserver = data -> {
-            EditText textInput = (EditText) findViewById(R.id.bitcoin_price_number);
+            EditText textInput = findViewById(R.id.bitcoin_price_number);
             textInput.setText(String.format(Locale.getDefault(), "%.1f", data));
         };
 
@@ -51,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
-        Button button = (Button) findViewById(R.id.refresh_button);
+        Button button = findViewById(R.id.refresh_button);
         button.setOnClickListener(v -> ranking.setupRanking());
-        Button saveButton = (Button) findViewById(R.id.save_button);
+        Button saveButton = findViewById(R.id.save_button);
         saveButton.setOnClickListener(v -> {
-            EditText textInput = (EditText) findViewById(R.id.bitcoin_price_number);
+            EditText textInput = findViewById(R.id.bitcoin_price_number);
             priceViewModel.updatePrice(textInput.getText().toString());
             textInput.clearFocus();
         });
